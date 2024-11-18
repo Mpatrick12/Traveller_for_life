@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">TravelBooking Payments</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'payments_home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'process_payment' booking_id=1 %}">Checkout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'payment_success' %}">Success</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'payment_failed' %}">Failed</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>Welcome to the Payments Portal</h1>
+        <p>Use this portal to securely manage your payments and transactions.</p>
+        <a href="{% url 'process_payment' booking_id=1 %}" class="btn btn-primary">Proceed to Checkout</a>
+    </div>
+{% endblock %}

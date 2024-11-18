@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <h1><a href="/">TravelBooking</a></h1>
+            <ul>
+                <li><a href="{% url 'tour_list' %}">Explore Tours</a></li>
+                <li><a href="{% url 'my_bookings' %}">My Bookings</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                    <li><a href="{% url 'operator_dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h2>Discover Your Next Adventure</h2>
+            <p>Explore unique tours and cultural experiences around the world.</p>
+            <a href="{% url 'tour_list' %}" class="btn">Browse Tours</a>
+        </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <form action="{% url 'search' %}" method="GET">
+                <input type="text" name="q" placeholder="Search for tours..." required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Featured Tours Section -->
+    <section class="featured-tours">
+        <div class="container">
+            <h3>Popular Tours</h3>
+            <div class="tours-grid">
+                {% for tour in tours %}
+                <div class="tour-card">
+                    <img src="{{ tour.image.url }}" alt="{{ tour.name }}">
+                    <h4>{{ tour.name }}</h4>
+                    <p>{{ tour.location }}</p>
+                    <p>Price: ${{ tour.price }}</p>
+                    <a href="{% url 'tour_detail' tour.id %}" class="btn">View Details</a>
+                </div>
+                {% empty %}
+                <p>No tours available at the moment.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    {% if user.is_authenticated %}
+    <section class="my-bookings">
+        <div class="container">
+            <h3>Your Bookings</h3>
+            <a href="{% url 'my_bookings' %}" class="btn">View My Bookings</a>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 TravelBooking. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+{% endblock %}

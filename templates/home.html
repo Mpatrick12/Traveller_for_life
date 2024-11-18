@@ -1,0 +1,9 @@
+{% extend 'base.html'%}
+{% block content %}
+    <title>Welcome to TravelBooking</title>
+    <div class="container mt-5">
+        <h1>Welcome to TravelBooking</h1>
+        <p>Discover amazing tours, cultural experiences, and accommodations for your next trip!</p>
+        <a href="{% url 'tour_list' %}" class="btn btn-primary">Explore Tours</a>
+    </div>
+{% endblock %}

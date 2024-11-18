@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ tour.title }}</h2>
+    <img src="{{ tour.image.url }}" class="img-fluid mb-4" alt="{{ tour.title }}">
+    <p>{{ tour.description }}</p>
+    <p><strong>Price:</strong> ${{ tour.price }}</p>
+    <form method="post" action="{% url 'book_tour' tour.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">Book Now</button>
+    </form>
+</div>
+{% endblock %}

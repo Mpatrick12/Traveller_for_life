@@ -1,0 +1,24 @@
+{% extend 'base.html' %}
+{% block content%}
+    <div class="container mt-5">
+        <h1>Book {{ tour.name }}</h1>
+        <p><strong>Description:</strong> {{ tour.description }}</p>
+        <p><strong>Price:</strong> ${{ tour.price }}</p>
+        <p><strong>Location:</strong> {{ tour.location }}</p>
+
+        <h3>Choose Your Date</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="date">Select Date</label>
+                <select class="form-control" id="date" name="date" required>
+                    {% for date in tour.available_dates %}
+                        <option value="{{ date }}">{{ date }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Confirm Booking</button>
+        </form>
+    </div>
+{% endblock%}
